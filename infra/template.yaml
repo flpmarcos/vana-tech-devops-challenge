@@ -29,5 +29,5 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: api_publico.lambda_handler
-      Runtime: python3.11
+      Runtime: python3.8
       CodeUri: ../lambda_api_functions/
