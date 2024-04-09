@@ -4,29 +4,6 @@ Description: Cloud formation for a DevOps Challenge
 
 Resources:
 
-  ApiFunctionRole:
-    Type: AWS::IAM::Role
-    Properties:
-      RoleName: !Sub apifunction-role-${AWS::StackName}
-      AssumeRolePolicyDocument:
-        Version: "2012-10-17"
-        Statement:
-          - Effect: Allow
-            Principal:
-              Service: lambda.amazonaws.com
-            Action: sts:AssumeRole
-      ManagedPolicyArns:
-        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
-
-  ApiFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      Handler: api_publico.lambda_handler
-      Runtime: python3.11
-      CodeUri: ./lambda_api_functions/
-      Role: !GetAtt ApiFunctionRole.Arn
-
-
   Api:
     Type: AWS::Serverless::Api
     Properties:
@@ -50,3 +27,47 @@ Resources:
                 httpMethod: GET
                 type: 'aws_proxy'
     
+  ApiFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: api_publico.lambda_handler
+      Runtime: python3.11
+      CodeUri: ./lambda_api_functions/
+      AutoPublishAlias: live
+      
+  StateMachine:
+    Type: AWS::Serverless::StateMachine
+    Properties:
+      Name: !Sub statemachine-${AWS::StackName}
+      DefinitionUri: sm_def.yaml
+      DefinitionSubstitutions: 
+        ApiFunction: !Ref ApiFunction
+      Role: !GetAtt StateMachineRole.Arn
+
+  StateMachineRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub statemachine-role-${AWS::StackName}
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: states.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+
+  InvokeFunctionPolicy:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyName: !Sub statemachine-invoke-function-policy-${AWS::StackName}
+      Roles:
+        - !Ref StateMachineRole
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Action:
+              - lambda:InvokeFunction
+            Resource: '*'
