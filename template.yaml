@@ -39,7 +39,7 @@ Resources:
     Type: AWS::Serverless::StateMachine
     Properties:
       Name: !Sub statemachine-${AWS::StackName}
-      DefinitionUri: sm_def.yaml
+      DefinitionUri: state_machine.yaml
       DefinitionSubstitutions: 
         ApiFunction: !Ref ApiFunction
       Role: !GetAtt StateMachineRole.Arn
