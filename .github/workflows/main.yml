@@ -12,6 +12,11 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
+    
+    - name: Setup Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.11'
 
     - name: Build and deploy
       run: |
@@ -27,6 +32,12 @@ jobs:
     if: github.event_name == 'workflow_dispatch'
     
     steps:
+
+    - name: Setup Python
+      uses: actions/setup-python@v2
+      with:
+       python-version: '3.11'
+
     - name: Destroy stack
       run: |
         aws cloudformation delete-stack --stack-name devops-challenge-stack
