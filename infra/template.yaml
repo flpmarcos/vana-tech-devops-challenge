@@ -2,6 +2,12 @@ AWSTemplateFormatVersion: '2010-09-09'
 Transform: 'AWS::Serverless-2016-10-31'
 
 Resources:
+
+  ApiBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: devops-challenge-bucket
+
   Api:
     Type: AWS::Serverless::Api
     Properties:

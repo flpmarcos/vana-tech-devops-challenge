@@ -22,7 +22,7 @@ jobs:
       run: |
         cd infra
         sam build --template-file template.yaml
-        sam deploy --stack-name devops-challenge-stack --template-file template.yaml --capabilities CAPABILITY_IAM --region us-east-1
+        sam deploy --stack-name devops-challenge-stack --template-file template.yaml --capabilities CAPABILITY_IAM --region us-east-1 --s3-bucket devops-challenge-bucket
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
