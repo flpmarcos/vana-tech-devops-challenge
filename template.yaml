@@ -33,3 +33,11 @@ Resources:
       Handler: api_publico.lambda_handler
       Runtime: python3.11
       CodeUri: ./lambda_api_functions/
+
+  LambdaInvokePermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !GetAtt ApiFunction.Arn
+      Action: lambda:InvokeFunction
+      Principal: states.amazonaws.com
+      SourceArn: !Sub "arn:aws:states:${AWS::Region}:${AWS::AccountId}:stateMachine:${StateMachine}"
