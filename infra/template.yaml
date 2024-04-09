@@ -7,6 +7,15 @@ Resources:
     Type: AWS::S3::Bucket
     Properties:
       BucketName: devops-challenge-bucket
+      BucketPolicy:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal: "*"
+            Action:
+              - s3:PutObject
+            Resource: 
+              - !Sub arn:aws:s3:::${ApiBucket}/*
 
   Api:
     Type: AWS::Serverless::Api
