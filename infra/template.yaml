@@ -50,3 +50,8 @@ Resources:
       Handler: api_publico.lambda_handler
       Runtime: python3.11
       CodeUri: ../lambda_api_functions/
+      Policies:
+        Statement:
+          - Effect: Allow
+            Action: "s3:PutObject"
+            Resource: !Sub "${ApiBucket.Arn}/*"
