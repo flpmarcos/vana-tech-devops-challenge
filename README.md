@@ -43,3 +43,16 @@ on:
 ### En que tener dos workflows ayuda ?
 Tener dos workflows ayuda en que antes que se a hecho el deploy tenga un estagio para el test. 
 
+
+## Troubleshotting
+1. Error para ejecutar el pipeline 
+  La mayoria de los errores son de permisos.
+
+
+2. AWS CloudWatch Logs role ARN must be set error
+  https://coady.tech/aws-cloudwatch-logs-arn/
+
+  The new API Gateway UI looks a bit different. You can find the "CloudWatch log role ARN" setting in Settings, under Client Certificates in the left nav.
+
+3. Lambda invocation failed with status: 403. Lambda request id:
+  https://repost.aws/questions/QUH0wdOjJ6Re6_o5lOoNRvzw/lambda-invocation-failed-with-status-403-on-new-aws-region

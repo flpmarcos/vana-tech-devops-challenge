@@ -33,3 +33,10 @@ Resources:
       Handler: api_publico.lambda_handler
       Runtime: python3.11
       CodeUri: ./lambda_api_functions/
+      Policies:
+        - Version: "2012-10-17"
+          Statement:
+            - Effect: Allow
+              Action:
+                - lambda:InvokeFunction
+              Resource: !GetAtt ApiFunction.Arn
