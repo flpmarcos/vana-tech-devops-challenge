@@ -4,6 +4,29 @@ Description: Cloud formation for a DevOps Challenge
 
 Resources:
 
+  ApiFunctionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub apifunction-role-${AWS::StackName}
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+
+  ApiFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: api_publico.lambda_handler
+      Runtime: python3.11
+      CodeUri: ./lambda_api_functions/
+      Role: !GetAtt ApiFunctionRole.Arn
+
+
   Api:
     Type: AWS::Serverless::Api
     Properties:
@@ -27,16 +50,3 @@ Resources:
                 httpMethod: GET
                 type: 'aws_proxy'
     
-  ApiFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      Handler: api_publico.lambda_handler
-      Runtime: python3.11
-      CodeUri: ./lambda_api_functions/
-      Policies:
-      - AWSLambdaBasicExecutionRole
-      - Statement:
-          - Effect: Allow
-            Action:
-              - lambda:InvokeFunction
-            Resource: !GetAtt ApiFunction.Arn
