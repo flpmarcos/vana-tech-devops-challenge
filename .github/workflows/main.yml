@@ -1,0 +1,24 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install dependencies
+      run: |
+        npm install -g aws-cdk
+        npm install
+
+    - name: Deploy to AWS
+      uses: aws-actions/aws-cli@v2
+      with:
+        args: sam deploy --stack-name devops-challenge-stack --template-file template.yaml --capabilities CAPABILITY_IAM
