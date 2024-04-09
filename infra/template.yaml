@@ -11,7 +11,7 @@ Resources:
   Api:
     Type: AWS::Serverless::Api
     Properties:
-      StageName: Prod
+      StageName: Dev
       DefinitionBody:
         swagger: '2.0'
         info:
@@ -31,9 +31,9 @@ Resources:
                 httpMethod: 'GET'
                 type: 'aws_proxy'
     
-  MyFunction:
+  ApiFunction:
     Type: AWS::Serverless::Function
     Properties:
       Handler: api_publico.lambda_handler
       Runtime: python3.11
-      CodeUri: ../lambda_api_functions/
+      CodeUri: ./lambda_api_functions/
