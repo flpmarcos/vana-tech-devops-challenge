@@ -1,20 +1,27 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: 'AWS::Serverless-2016-10-31'
+Description: Cloud formation for a DevOps Challenge
+
+Parameters:
+  BucketName:
+    Type: String
+    Default: "devops-challenge-bucket"
 
 Resources:
 
   ApiBucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: devops-challenge-bucket
+      BucketName: !Ref BucketName
       BucketPolicy:
         Version: '2012-10-17'
         Statement:
           - Effect: Allow
             Principal: "*"
             Action:
-              - s3:PutObject
-            Resource: "arn:aws:s3:::devops-challenge-bucket/*"
+              - s3:*
+            Resource: 
+              - !Sub "arn:aws:s3:::${BucketName}/*"
 
   Api:
     Type: AWS::Serverless::Api
