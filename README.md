@@ -55,4 +55,4 @@ Tener dos workflows ayuda en que antes que se a hecho el deploy tenga un estagio
   The new API Gateway UI looks a bit different. You can find the "CloudWatch log role ARN" setting in Settings, under Client Certificates in the left nav.
 
 3. Lambda invocation failed with status: 403. Lambda request id:
-  https://repost.aws/questions/QUH0wdOjJ6Re6_o5lOoNRvzw/lambda-invocation-failed-with-status-403-on-new-aws-region
+  
