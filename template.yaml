@@ -2,24 +2,7 @@ AWSTemplateFormatVersion: '2010-09-09'
 Transform: 'AWS::Serverless-2016-10-31'
 Description: Cloud formation for a DevOps Challenge
 
-Parameters:
-  BucketName:
-    Type: String
-    Default: "devops-challenge-bucket"
-
 Resources:
-
-  ApiBucket:
-    Type: AWS::S3::Bucket
-    Properties:
-      BucketName: !Ref BucketName
-      BucketPolicy:
-        Version: '2012-10-17'
-        Statement:
-          - Effect: Allow
-            Principal: "*"
-            Action: "s3:PutObject"
-            Resource: !Sub "arn:aws:s3:::${BucketName}/*"
 
   Api:
     Type: AWS::Serverless::Api
@@ -39,7 +22,7 @@ Resources:
                   schema:
                     type: 'string'
               x-amazon-apigateway-integration:
-                uri: !Sub arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${MyFunction.Arn}/invocations
+                uri: !Sub arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${ApiFunction.Arn}/invocations
                 passthroughBehavior: 'when_no_match'
                 httpMethod: 'GET'
                 type: 'aws_proxy'
@@ -49,9 +32,4 @@ Resources:
     Properties:
       Handler: api_publico.lambda_handler
       Runtime: python3.11
-      CodeUri: ../lambda_api_functions/
-      Policies:
-        Statement:
-          - Effect: Allow
-            Action: "s3:PutObject"
-            Resource: !Sub "${ApiBucket.Arn}/*"
+      CodeUri: ./lambda_api_functions/
