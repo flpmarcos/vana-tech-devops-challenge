@@ -14,8 +14,7 @@ Resources:
             Principal: "*"
             Action:
               - s3:PutObject
-            Resource: 
-              - !Sub arn:aws:s3:::${ApiBucket}/*
+            Resource: "arn:aws:s3:::devops-challenge-bucket/*"
 
   Api:
     Type: AWS::Serverless::Api
