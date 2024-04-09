@@ -7,7 +7,7 @@ Resources:
   Api:
     Type: AWS::Serverless::Api
     Properties:
-      StageName: Dev
+      StageName: live
       DefinitionBody:
         swagger: '2.0'
         info:
@@ -24,7 +24,7 @@ Resources:
               x-amazon-apigateway-integration:
                 uri: !Sub arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${ApiFunction.Arn}/invocations
                 passthroughBehavior: 'when_no_match'
-                httpMethod: 'GET'
+                httpMethod: POST
                 type: 'aws_proxy'
     
   ApiFunction:
