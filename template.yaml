@@ -22,7 +22,7 @@ Resources:
                   schema:
                     type: 'string'
               x-amazon-apigateway-integration:
-                Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${ApiFunction.Arn}/invocations
+                uri: !Sub arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${ApiFunction.Arn}/invocations
                 passthroughBehavior: 'when_no_match'
                 httpMethod: GET
                 type: 'aws_proxy'
