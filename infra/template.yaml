@@ -18,10 +18,8 @@ Resources:
         Statement:
           - Effect: Allow
             Principal: "*"
-            Action:
-              - s3:PutObject
-            Resource: 
-              - !Sub "arn:aws:s3:::${BucketName}/*"
+            Action: "s3:PutObject"
+            Resource: !Sub "arn:aws:s3:::${BucketName}/*"
 
   Api:
     Type: AWS::Serverless::Api
