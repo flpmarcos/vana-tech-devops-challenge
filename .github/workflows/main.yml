@@ -15,8 +15,9 @@ jobs:
 
     - name: Build and deploy
       run: |
-        sam build
-        sam deploy --stack-name devops-challenge-stack --template-file ../infra/template.yaml --capabilities CAPABILITY_IAM
+        cd infra
+        sam build --template-file template.yaml
+        sam deploy --stack-name devops-challenge-stack --template-file template.yaml --capabilities CAPABILITY_IAM 
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
