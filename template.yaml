@@ -4,10 +4,10 @@ Description: Cloud formation for a DevOps Challenge
 
 Resources:
 
-  Api:
+  ApiGateway:
     Type: AWS::Serverless::Api
     Properties:
-      StageName: live
+      StageName: dev
       DefinitionBody:
         swagger: '2.0'
         info:
@@ -33,9 +33,11 @@ Resources:
       Handler: api_publico.lambda_handler
       Runtime: python3.11
       CodeUri: ./lambda_api_functions/
+      AutoPublishAlias: dev
       Policies:
       - Statement:
           - Effect: Allow
             Action:
               - lambda:InvokeFunction
             Resource: "*"
+
