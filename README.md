@@ -104,11 +104,16 @@ sam deploy --guided
 ```
 Siga las instrucciones interactivas proporcionadas por sam deploy --guided para configurar la implementación.
 
+## 6. Remover la aplicación:
+```
+aws cloudformation delete-stack StackName
+```
 
+---
 
 ## Implementación Github
 
-## 1. Como configurar la variables
+## 1. Como configurar las variables
 Con la cuenta creada en AWS y las credenciales en manos, crea 3 secretos en github.
 
 ```
@@ -119,6 +124,7 @@ AWS_REGION
 
 ## 2. Pipeline GitHub Actions
 
+### 2.1 Pre-build
 Para el pipeline tenemos dos workflows y dos branch (Develop y Production), Cuando la branch develop sufre cambio el workflow abajo es activado.
 
 `.github/workflows/pre-build.yml` file:
@@ -128,9 +134,10 @@ on:
     branches:
       - develop
 ```
-
 Este workflow hace el test pero no hace el deploy, para hacer el deploy es necesario hacer un pull request para lá branch production.
 
+
+### 2.2 Build
 Mientra echo el pull request el trigger es activado llamando el workflow abajo
 
 `.github/workflows/build.yml` file:
@@ -141,32 +148,36 @@ on:
       - production
 ```
 
-### En que tener dos workflows ayuda ?
-Tener dos workflows ayuda en que antes que se a hecho el deploy tenga un estagio para el test. 
-
+---
 
 ## Mantenimiento
 
 Para el mantenimiento continuo de la aplicación, tenga en cuenta las siguientes consideraciones:
 
-### Gestión de Dependencias
+### 1. Gestión de Dependencias
 
 Si hay cambios en las dependencias del proyecto, asegúrese de actualizarlas y probar la aplicación localmente antes de realizar despliegues en producción.
 
-### Seguridad
+### 2. Seguridad
 
 Mantenga actualizadas las políticas de seguridad y revise regularmente los permisos y configuraciones de seguridad de los recursos de AWS.
 
-### Monitorización y Registro
+### 3. Monitorización y Registro
 
 Implemente la monitorización y registro adecuados para la aplicación y sus recursos en AWS. Utilice servicios como Amazon CloudWatch para monitorear métricas y registros de aplicaciones.
 
-## Problemas - Troubleshotting
-### 1. Error para ejecutar el pipeline 
-  La mayoria de los errores son de permisos de usuario en IAM
+---
 
-### 2. Se usted intentar gravar los dados recebido en lo API Gateway y recibir este error:
-  AWS CloudWatch Logs role ARN must be set error
+## Problemas - Troubleshotting
+
+### 1. Error para ejecutar el pipeline 
+La mayoria de los errores son de permisos de usuario en IAM
+
+### 2. Se usted intentar gravar los dados recebido de API Gateway en CloudWatch y recibir este error abajo:
+``` 
+AWS CloudWatch Logs role ARN must be set error
+```
+
   Use este guia:
   https://coady.tech/aws-cloudwatch-logs-arn/
 
