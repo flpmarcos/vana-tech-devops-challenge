@@ -67,7 +67,7 @@ jobs:
           --stack-name ${{ steps.vars.outputs.environment }} \
           --s3-bucket ${{ steps.vars.outputs.environment }} \
           --capabilities CAPABILITY_IAM CAPABILITY_NAMED_IAM \
-          --no-confirm-changeset \ 
+          --no-confirm-changeset \
           --no-fail-on-empty-changeset
             
 
