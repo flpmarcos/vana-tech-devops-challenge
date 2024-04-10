@@ -7,7 +7,7 @@ Resources:
   ApiGateway:
     Type: AWS::Serverless::Api
     Properties:
-      StageName: dev
+      StageName: v1
       DefinitionBody:
         swagger: '2.0'
         info:
@@ -33,11 +33,18 @@ Resources:
       Handler: api_publico.lambda_handler
       Runtime: python3.11
       CodeUri: ./lambda_api_functions/
-      AutoPublishAlias: dev
+      AutoPublishAlias: v1
       Policies:
       - Statement:
           - Effect: Allow
             Action:
               - lambda:InvokeFunction
             Resource: "*"
+
+Outputs:
+  ApiGateway:
+    Description: API Gateway endpoint URL 
+    Value: !Sub "https://${ApiGateway}.execute-api.${AWS::Region}.amazonaws.com/v1/api/"
+
+
 
