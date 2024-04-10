@@ -16,89 +16,89 @@ El proyecto está organizado de la siguiente manera:
 
 Para implementar la solución, siga los siguientes pasos:
 
-1. Clonar el Repositorio:
+## 1. Clonar el Repositorio:
 
 ```
 https://github.com/flpmarcos/vana-tech-devops-challenge.git
 ```
 
-2. Cómo instalar Python 3 y herramientas de AWS en Linux Debian
+## 2. Cómo instalar Python 3 y herramientas de AWS en Linux Debian
 
-  2.1 Instalar Python 3:
+### 2.1 Instalar Python 3:
 
-  ```bash
-  sudo apt update
-  sudo apt install python3
-  ```
+```bash
+sudo apt update
+sudo apt install python3
+```
 
-  2.2 Verificar la instalación de Python 3:
+### 2.2 Verificar la instalación de Python 3:
 
-  ```bash
-  python3 --version
-  ```
+```bash
+python3 --version
+```
 
-  2.3 Instalar el gestor de paquetes pip para Python 3:
+### 2.3 Instalar el gestor de paquetes pip para Python 3:
 
-  ```bash
-  sudo apt install python3-pip
-  ```
+```bash
+sudo apt install python3-pip
+```
 
-  2.4 Instalar AWS CLI:
+### 2.4 Instalar AWS CLI:
 
-  ```bash
-  pip3 install awscli --upgrade --user
-  ```
+```bash
+pip3 install awscli --upgrade --user
+```
 
-  2.5 Verificar la instalación de AWS CLI:
+### 2.5 Verificar la instalación de AWS CLI:
 
-  ```bash
-  aws --version
-  ```
+```bash
+aws --version
+```
 
-  2.6 Instalar Docker:
+### 2.6 Instalar Docker:
 
-  ```bash
-  sudo apt install docker.io
-  ```
+```bash
+sudo apt install docker.io
+```
 
-  2.7 Agregar su usuario al grupo Docker (opcional):
+### 2.7 Agregar su usuario al grupo Docker (opcional):
 
-  ```bash
-  sudo usermod -aG docker $USER
-  ```
+```bash
+sudo usermod -aG docker $USER
+```
 
-  2.8 Cerrar sesión y volver a iniciar sesión:
+### 2.8 Cerrar sesión y volver a iniciar sesión:
 
-  Esto es necesario para que los cambios en el grupo surtan efecto.
+Esto es necesario para que los cambios en el grupo surtan efecto.
 
-  2.9 Instalar AWS SAM CLI:
+### 2.9 Instalar AWS SAM CLI:
 
-  ```bash
-  sudo apt install curl
-  curl -L "https://github.com/aws/aws-sam-cli/releases/latest/download/aws-sam-cli-linux-x86_64.zip" -o sam.zip
-  sudo apt install unzip
-  sudo unzip sam.zip -d /usr/local/bin/
-  ```
+```bash
+sudo apt install curl
+curl -L "https://github.com/aws/aws-sam-cli/releases/latest/download/aws-sam-cli-linux-x86_64.zip" -o sam.zip
+sudo apt install unzip
+sudo unzip sam.zip -d /usr/local/bin/
+```
 
-  2.10 Verificar la instalación de AWS SAM CLI:
+### 2.10 Verificar la instalación de AWS SAM CLI:
 
-  ```bash
-  sam --version
-  ```
+```bash
+sam --version
+```
 
-  Con estos pasos, tendrás Python 3, AWS CLI y AWS SAM CLI instalados en tu sistema Linux Debian. Asegúrate de configurar tus credenciales de AWS usando el comando `aws configure` después de instalar AWS CLI, y estarás listo.
+Con estos pasos, tendrás Python 3, AWS CLI y AWS SAM CLI instalados en tu sistema Linux Debian. Asegúrate de configurar tus credenciales de AWS usando el comando `aws configure` después de instalar AWS CLI, y estarás listo.
 
 
-3. Configurar Credenciales de AWS:
+## 3. Configurar Credenciales de AWS:
 Asegúrese de tener las credenciales de AWS configuradas localmente. Puede hacerlo mediante la configuración de AWS CLI con variables de entorno en linux.
 
-4. Construir la Aplicación:
+## 4. Construir la Aplicación:
 ```
 cd vana-tech-devops-challenge
 sam build
 ```
 
-5. Desplegar la Aplicación:
+## 5. Desplegar la Aplicación:
 ```
 sam deploy --guided
 ```
@@ -108,7 +108,7 @@ Siga las instrucciones interactivas proporcionadas por sam deploy --guided para 
 
 ## Implementación Github
 
-1. Como configurar la variables
+## 1. Como configurar la variables
 Con la cuenta creada en AWS y las credenciales en manos, crea 3 secretos en github.
 
 ```
@@ -117,7 +117,7 @@ AWS_SECRET_ACCESS_KEY
 AWS_REGION
 ```
 
-2. Pipeline GitHub Actions
+## 2. Pipeline GitHub Actions
 
 Para el pipeline tenemos dos workflows y dos branch (Develop y Production), Cuando la branch develop sufre cambio el workflow abajo es activado.
 
