@@ -162,16 +162,16 @@ Mantenga actualizadas las políticas de seguridad y revise regularmente los perm
 Implemente la monitorización y registro adecuados para la aplicación y sus recursos en AWS. Utilice servicios como Amazon CloudWatch para monitorear métricas y registros de aplicaciones.
 
 ## Problemas - Troubleshotting
-1. Error para ejecutar el pipeline 
+### 1. Error para ejecutar el pipeline 
   La mayoria de los errores son de permisos de usuario en IAM
 
-2. Se usted intentar gravar los dados recebido en lo API Gateway y recibir este error:
+### 2. Se usted intentar gravar los dados recebido en lo API Gateway y recibir este error:
   AWS CloudWatch Logs role ARN must be set error
   Use este guia:
   https://coady.tech/aws-cloudwatch-logs-arn/
 
   The new API Gateway UI looks a bit different. You can find the "CloudWatch log role ARN" setting in Settings, under Client Certificates in the left nav.
 
-3. Lambda invocation failed with status: 403 on CloudWhatch Log
+### 3. Lambda invocation failed with status: 403 on CloudWhatch Log
 
   
